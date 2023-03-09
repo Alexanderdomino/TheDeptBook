@@ -87,7 +87,7 @@ public class MainWindowViewModel : BindableBase
 
         private DelegateCommand addCommand;
         public DelegateCommand AddCommand =>
-            addCommand ?? (addCommand = new DelegateCommand(ExecuteAddCommand));
+            addCommand ??= new DelegateCommand(ExecuteAddCommand);
 
         void ExecuteAddCommand()
         {

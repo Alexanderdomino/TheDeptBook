@@ -10,12 +10,41 @@
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="MainWindow" Height="370" Width="350">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <prism:InvokeCommandAction Command="{Binding ClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Window.Resources>
         <Thickness x:Key="TboxMargin">0,10,0,0</Thickness>
         <Thickness x:Key="ButtonMargin">0,10,0,0</Thickness>
     </Window.Resources>
     
-    <StackPanel 
+    <StackPanel>
+        <Menu DockPanel.Dock="Top" Name="mainMenu">
+            <MenuItem Header="_File" >
+                <MenuItem Header="_New" Command="{Binding NewFileCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding OpenFileCommand}" />
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}" />
+                <MenuItem Header="Save _As" Command="{Binding SaveAsCommand}" />
+                <MenuItem Header="E_xit" Command="{Binding CloseAppCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Debitors">
+                <MenuItem Header="_Add new" Command="{Binding AddCommand}"/>
+                <MenuItem Header="_Edit" Command="{Binding EditCommand}"/>
+                <MenuItem Header="_Delete" Command="{Binding DeleteCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Color">
+                <MenuItem Header="_Default" Command="{Binding ColorCommand}" CommandParameter="Default" />
+                <MenuItem Header="_Bisque" Command="{Binding ColorCommand}" CommandParameter="Bisque" />
+                <MenuItem Header="Light_Green" Command="{Binding ColorCommand}" CommandParameter="LightGreen"/>
+                <MenuItem Header="_LightBlue" Command="{Binding ColorCommand}" CommandParameter="LightBlue"/>
+                <MenuItem Header="Ghost_White" Command="{Binding ColorCommand}" CommandParameter="GhostWhite"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel 
         Orientation="Horizontal"
         HorizontalAlignment="Center">
         
@@ -35,24 +64,33 @@
             <TextBox HorizontalAlignment="Center"
                      FontSize="15">
                 Debitor Book</TextBox>
-            <ListBox Name="LbxContacts"
-                     ItemsSource="{Binding Path=Contacts}"
-                     SelectedItem="{Binding Path=CurrentContact}"
-                     SelectedIndex="{Binding Path=CurrentIndex}"
-                     IsSynchronizedWithCurrentItem="True"
-                     DisplayMemberPath="Name"
-                     Margin="10"
-                     Height="250">
-                
-            </ListBox>
+            
+            <DataGrid ItemsSource="{Binding Path=Debitors}" 
+                      SelectedItem="{Binding Path=CurrentDebitor}"
+                      SelectedIndex="{Binding Path=CurrentIndex}"
+                      IsSynchronizedWithCurrentItem="True"
+                      Margin="9,9,9,9"  
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False" 
+                      IsReadOnly="True"
+                      MinRowHeight="12"
+                      Height="250">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <prism:InvokeCommandAction Command="{Binding EditCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+            
         </StackPanel>
 
         <StackPanel Width="150">
             <Button Name ="AddContactButton" 
                     Width="90"
-                    Command = "{Binding OpenAddContactCommand}">
+                    Command = "{Binding AddCommand}">
                 Add Contact
             </Button>
         </StackPanel>
     </StackPanel>
+        </StackPanel>
 </Window>
