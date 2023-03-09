@@ -6,10 +6,9 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:TheDeptBook.View"
-        xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="MainWindow" Height="370" Width="350">
+        Title="{Binding Title}" Height="370" Width="350">
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -23,7 +22,7 @@
     </Window.Resources>
     
     <StackPanel>
-        <Menu DockPanel.Dock="Top" Name="mainMenu">
+        <Menu DockPanel.Dock="Top" Name="MainMenu">
             <MenuItem Header="_File" >
                 <MenuItem Header="_New" Command="{Binding NewFileCommand}"/>
                 <MenuItem Header="_Open" Command="{Binding OpenFileCommand}" />
@@ -85,11 +84,11 @@
         </StackPanel>
 
         <StackPanel Width="150">
-            <Button Name ="AddContactButton" 
+            <Button Name ="AddDebitorButton" 
                     Width="90"
                     Command = "{Binding AddCommand}"
                     FontSize="15">
-                Add Contact
+                Add Debitor
             </Button>
         </StackPanel>
     </StackPanel>

@@ -10,7 +10,7 @@ public partial class DebitorView : Window
         InitializeComponent();
     }
     
-    private void btnOk_Click(object sender, RoutedEventArgs e)
+    private void btnSave_Click(object sender, RoutedEventArgs e)
     {
         var vm = DataContext as DebitorViewModel;
         if (vm.IsValid)
