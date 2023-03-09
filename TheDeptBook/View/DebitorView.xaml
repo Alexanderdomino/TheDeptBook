@@ -31,15 +31,15 @@
         <TextBlock>
             Enter Name of Contact:
         </TextBlock>
-        <TextBox Name = "TboxName">
-            Name
+        <TextBox Name = "TboxName"
+                 Text="{Binding Path=CurrentDebitor.Name}">
         </TextBox>
 
         <TextBlock>
             Enter initial value:
         </TextBlock>
-        <TextBox Name = "TboxValue">
-            Value
+        <TextBox Name = "TboxValue"
+                 Text="{Binding Path=CurrentDebitor.Balance}">
         </TextBox>
         
         <TextBlock>
@@ -49,13 +49,14 @@
                     HorizontalAlignment="Center">
             <Button Name="SaveButton" 
                     Width="60"
-                    Command="{Binding AddCommand}">
+                    Command="{Binding SaveBtnCommand}">
                 Save
             </Button>
 
             <Button Name="CancelButton" 
                     Width="60"
-                    Command = "{Binding CloseAddContactCommand}">
+                    Command = "{Binding CloseAddContactCommand}"
+                    IsCancel="True">
                 Cancel
             </Button>
         </StackPanel>
