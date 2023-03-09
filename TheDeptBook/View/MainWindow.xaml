@@ -1,0 +1,54 @@
+﻿<Window x:Class="TheDeptBook.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheDeptBook.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="370" Width="350">
+    <Window.Resources>
+        <Thickness x:Key="TboxMargin">0,10,0,0</Thickness>
+        <Thickness x:Key="ButtonMargin">0,10,0,0</Thickness>
+    </Window.Resources>
+    
+    <StackPanel 
+        Orientation="Horizontal"
+        HorizontalAlignment="Center">
+        
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="{StaticResource ButtonMargin}"></Setter>
+                <!-- <Setter Property="Background" Value="{StaticResource ButtonColor}"></Setter> -->
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="{StaticResource ButtonMargin}"></Setter>
+                <!-- <Setter Property="Background" Value="{StaticResource ButtonColor}"></Setter> -->
+            </Style>
+        </StackPanel.Resources>
+        
+        <StackPanel Width="200">
+
+            <TextBox HorizontalAlignment="Center"
+                     FontSize="15">
+                Debitor Book</TextBox>
+            <ListBox Name="LbxContacts"
+                     ItemsSource="{Binding Path=Contacts}"
+                     SelectedItem="{Binding Path=CurrentContact}"
+                     SelectedIndex="{Binding Path=CurrentIndex}"
+                     IsSynchronizedWithCurrentItem="True"
+                     DisplayMemberPath="Name"
+                     Margin="10"
+                     Height="250">
+                
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Width="150">
+            <Button Name ="AddContactButton" 
+                    Width="90"
+                    Command = "{Binding OpenAddContactCommand}">
+                Add Contact
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
