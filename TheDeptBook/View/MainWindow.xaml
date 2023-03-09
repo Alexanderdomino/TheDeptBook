@@ -60,10 +60,10 @@
         </StackPanel.Resources>
         
         <StackPanel Width="200">
-
-            <TextBox HorizontalAlignment="Center"
-                     FontSize="15">
-                Debitor Book</TextBox>
+            
+            <Label HorizontalAlignment="Center"
+                   FontSize="15">
+                Debitor Book</Label>
             
             <DataGrid ItemsSource="{Binding Path=Debitors}" 
                       SelectedItem="{Binding Path=CurrentDebitor}"
@@ -87,7 +87,8 @@
         <StackPanel Width="150">
             <Button Name ="AddContactButton" 
                     Width="90"
-                    Command = "{Binding AddCommand}">
+                    Command = "{Binding AddCommand}"
+                    FontSize="15">
                 Add Contact
             </Button>
         </StackPanel>
