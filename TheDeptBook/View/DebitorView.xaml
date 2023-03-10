@@ -56,7 +56,6 @@
 
             <Button Name="CancelButton" 
                     Width="60"
-                    Command = "{Binding CloseAddContactCommand}"
                     IsCancel="True">
                 Cancel
             </Button>

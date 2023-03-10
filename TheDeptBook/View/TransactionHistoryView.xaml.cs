@@ -9,4 +9,13 @@ public partial class TransactionHistoryView : Window
     {
         InitializeComponent();
     }
+
+    private void btnSave_Click(object sender, RoutedEventArgs e)
+    {
+        var vm = DataContext as TransactionHistoryViewModel;
+        if (vm.IsValid)
+            DialogResult = true;
+        else
+            MessageBox.Show("Enter values", "Missing data");
+    }
 }

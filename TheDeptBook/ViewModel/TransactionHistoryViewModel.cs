@@ -10,9 +10,11 @@ public class TransactionHistoryViewModel : BindableBase
 {
     public TransactionHistoryViewModel(string title, Debitor debitor)
     {
+        CurrentTransactions = new ObservableCollection<double>();
         Title = title;
         CurrentDebitor = debitor;
         CurrentTransactions = debitor.Transactions;
+        CurrentTransactions.Add(500);
     }
 
     #region Properties
@@ -83,5 +85,25 @@ public class TransactionHistoryViewModel : BindableBase
     }
 
     #endregion
+    
+    ICommand _closeCommand;
+    public ICommand CloseCommand
+    {
+        get
+        {
+            return _closeCommand ??= new DelegateCommand(
+                    CloseCommand_Execute, CloseCommand_CanExecute)
+                .ObservesProperty(() => CurrentDebitor.Name);
+        }
+    }
+    private void CloseCommand_Execute()
+    {
+        // No action here - is handled i code behind
+    }
+
+    private bool CloseCommand_CanExecute()
+    {
+        return IsValid;
+    }
 }
 

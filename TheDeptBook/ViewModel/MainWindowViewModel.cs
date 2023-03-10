@@ -202,18 +202,18 @@ public class MainWindowViewModel : BindableBase
             var tempDebitor = CurrentDebitor.Clone();
             var vm = new TransactionHistoryViewModel("Add Transaction", tempDebitor)
             {
-                //Specialities = specialities
             };
             var dlg = new TransactionHistoryView() 
             {
                 DataContext = vm,
                 Owner = Application.Current.MainWindow
             };
-            if (dlg.ShowDialog() != true) return;
-            // Copy values back
-            CurrentDebitor.Balance = tempDebitor.Balance;
-            CurrentDebitor.Transactions = tempDebitor.Transactions;
-            Dirty = true;
+            if (dlg.ShowDialog() == true)
+            {
+                CurrentDebitor.Balance = tempDebitor.Balance;
+                CurrentDebitor.Transactions = tempDebitor.Transactions;
+                Dirty = true;
+            }
         }
 
         DelegateCommand _NewFileCommand;
@@ -245,8 +245,8 @@ public class MainWindowViewModel : BindableBase
         {
             var dialog = new OpenFileDialog
             {
-                Filter = "Agent assignment documents|*.agn|All Files|*.*",
-                DefaultExt = "agn"
+                Filter = "Agent assignment documents|*.tdb|All Files|*.*",
+                DefaultExt = "tdb"
             };
             if (filePath == "")
                 dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TheDeptBook.View"
         mc:Ignorable="d"
-        Title="The Dept Book" Height="350" Width="250">
+        Title="The Dept Book" Height="400" Width="250">
     
     <Window.Resources>
         <Thickness x:Key="TboxMargin">0,0,0,10</Thickness>
@@ -37,6 +37,12 @@
 
         </ListBox>
         
+        <WrapPanel HorizontalAlignment="Center">
+            <Label Content="Balance: "
+                   Margin="0,9,0,0"/> 
+            <Label Content="{Binding CurrentDebitor.Balance}"/>
+        </WrapPanel>
+        
         <Label>
             Enter new transaction:
         </Label>
@@ -52,11 +58,11 @@
                 Add
             </Button>
 
-            <Button Name="CancelButton" 
+            <Button Name="DoneButton" 
                     Width="60"
                     Command = "{Binding CloseCommand}"
-                    IsCancel="True">
-                Cancel
+                    Click="btnSave_Click">
+                Done
             </Button>
         </StackPanel>
     </StackPanel>

@@ -18,7 +18,7 @@
     
     <Window.Resources>
         <Thickness x:Key="TboxMargin">0,10,0,0</Thickness>
-        <Thickness x:Key="ButtonMargin">0,10,0,0</Thickness>
+        <Thickness x:Key="ButtonMargin">0,40,0,0</Thickness>
     </Window.Resources>
     
     <StackPanel>
@@ -34,13 +34,6 @@
                 <MenuItem Header="_Add new" Command="{Binding AddCommand}"/>
                 <MenuItem Header="_Edit" Command="{Binding EditCommand}"/>
                 <MenuItem Header="_Delete" Command="{Binding DeleteCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Color">
-                <MenuItem Header="_Default" Command="{Binding ColorCommand}" CommandParameter="Default" />
-                <MenuItem Header="_Bisque" Command="{Binding ColorCommand}" CommandParameter="Bisque" />
-                <MenuItem Header="Light_Green" Command="{Binding ColorCommand}" CommandParameter="LightGreen"/>
-                <MenuItem Header="_LightBlue" Command="{Binding ColorCommand}" CommandParameter="LightBlue"/>
-                <MenuItem Header="Ghost_White" Command="{Binding ColorCommand}" CommandParameter="GhostWhite"/>
             </MenuItem>
         </Menu>
         <StackPanel 
@@ -62,7 +55,7 @@
             
             <Label HorizontalAlignment="Center"
                    FontSize="15">
-                Debitor Book</Label>
+                Debt Book</Label>
             
             <DataGrid ItemsSource="{Binding Path=Debitors}" 
                       SelectedItem="{Binding Path=CurrentDebitor}"
@@ -73,13 +66,31 @@
                       CanUserDeleteRows="False" 
                       IsReadOnly="True"
                       MinRowHeight="12"
-                      Height="250">
+                      Height="250"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Name">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Balance">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Balance}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <prism:InvokeCommandAction Command="{Binding AddTransactionCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </DataGrid>
+
             
         </StackPanel>
 
@@ -90,6 +101,12 @@
                     FontSize="15">
                 Add Debitor
             </Button>
+            
+            <TextBlock TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Margin="0,50,10,0"
+                       Text="The Purpose of &#x0a;THE DEBT BOOK&#x0a;is for you to keep track of your all Debitors.&#x0a;&#x0a;- Created by:&#x0a;Alexander&#x0a;Rasmus&#x0a;Asger">
+            </TextBlock>
         </StackPanel>
     </StackPanel>
         </StackPanel>
