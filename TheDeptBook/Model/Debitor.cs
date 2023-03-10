@@ -11,9 +11,11 @@ public class Debitor : BindableBase
     string name;
     double balance;
     double balanceDiff;
-
+    ObservableCollection<double> transactions;
+    
     public Debitor()
     {
+        transactions = new ObservableCollection<double>();
     }
 
     public Debitor(string dName, double dBalance)
@@ -24,8 +26,8 @@ public class Debitor : BindableBase
         balanceDiff = 0;
     }
     
-    private ObservableCollection<double> transactions;
-    [Browsable(false)]
+    
+    
     public ObservableCollection<double> Transactions
     {
         get { return transactions; }
@@ -59,7 +61,6 @@ public class Debitor : BindableBase
             SetProperty(ref balance, value);
         }
     }
-    [Browsable(false)]
     public double BalanceDiff
     {
         get

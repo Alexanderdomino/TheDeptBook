@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -10,11 +11,15 @@ public class TransactionHistoryViewModel : BindableBase
 {
     public TransactionHistoryViewModel(string title, Debitor debitor)
     {
+        Trace.WriteLine("Entering Constructor of TransactionHistoryViewModel");
         CurrentTransactions = new ObservableCollection<double>();
         Title = title;
+        Trace.WriteLine(Title);
         CurrentDebitor = debitor;
+        Trace.WriteLine(CurrentDebitor);
         CurrentTransactions = debitor.Transactions;
-        CurrentTransactions.Add(500);
+        Trace.WriteLine(debitor.Transactions);
+        Trace.WriteLine(CurrentTransactions);
     }
 
     #region Properties
@@ -75,8 +80,12 @@ public class TransactionHistoryViewModel : BindableBase
 
     private void AddBtnCommand_Execute()
     {
+        Trace.WriteLine("entering addCommand");
         CurrentTransactions.Add(CurrentDebitor.BalanceDiff);
+        Trace.WriteLine("added to list");
+        Trace.WriteLine(CurrentTransactions);
         CurrentDebitor.Balance += CurrentDebitor.BalanceDiff;
+        Trace.WriteLine("added to balance");
     }
 
     private bool AddBtnCommand_CanExecute()

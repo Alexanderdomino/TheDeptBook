@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -21,8 +22,8 @@ public class MainWindowViewModel : BindableBase
         public MainWindowViewModel()
         {
             Debitors = new ObservableCollection<Debitor>();
-            Debitors.Add(new Debitor("Muddi fra bæst", 2000));
-            Debitors.Add(new Debitor("Muddi ikke fra bæst",-2560));
+            Debitors.Add(new Debitor("Søren Nielsen", 2000));
+            Debitors.Add(new Debitor("Søren Hansen",-5560));
             CurrentDebitor = Debitors[0];
         }
 
@@ -92,7 +93,7 @@ public class MainWindowViewModel : BindableBase
         void ExecuteAddCommand()
         {
             var newDebitor = new Debitor();
-            var vm = new DebitorViewModel("Add new agent", newDebitor);
+            var vm = new DebitorViewModel("Add new debitor", newDebitor);
 
             var dlg = new DebitorView
             {
@@ -101,7 +102,8 @@ public class MainWindowViewModel : BindableBase
             if (dlg.ShowDialog() == true)
             {
                 Debitors.Add(newDebitor);
-                CurrentDebitor = newDebitor; // Or CurrentIndex = Agents.Count - 1;
+                Trace.WriteLine(newDebitor.Transactions);
+                CurrentDebitor = newDebitor; // Or CurrentIndex = Debitors.Count - 1;
                 Dirty = true;
             }
         }
