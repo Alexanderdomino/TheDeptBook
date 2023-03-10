@@ -171,7 +171,7 @@ public class MainWindowViewModel : BindableBase
         void ExecuteEditCommand()
         {
             var tempDebitor = CurrentDebitor.Clone();
-            var vm = new DebitorViewModel("Edit agent", tempDebitor)
+            var vm = new DebitorViewModel("Edit debitor", tempDebitor)
             {
                 //Specialities = specialities
             };
@@ -190,6 +190,30 @@ public class MainWindowViewModel : BindableBase
         bool CanExecuteEditCommand()
         {
             return CurrentIndex >= 0;
+        }
+
+        private DelegateCommand _addTransactionCommand;
+        public DelegateCommand AddTransactionCommand =>
+            _addTransactionCommand ??= new DelegateCommand(ExecuteAddTransactionCommand, CanExecuteEditCommand)
+                .ObservesProperty(() => CurrentIndex);
+
+        private void ExecuteAddTransactionCommand()
+        {
+            var tempDebitor = CurrentDebitor.Clone();
+            var vm = new TransactionHistoryViewModel("Add Transaction", tempDebitor)
+            {
+                //Specialities = specialities
+            };
+            var dlg = new TransactionHistoryView() 
+            {
+                DataContext = vm,
+                Owner = Application.Current.MainWindow
+            };
+            if (dlg.ShowDialog() != true) return;
+            // Copy values back
+            CurrentDebitor.Balance = tempDebitor.Balance;
+            CurrentDebitor.Transactions = tempDebitor.Transactions;
+            Dirty = true;
         }
 
         DelegateCommand _NewFileCommand;

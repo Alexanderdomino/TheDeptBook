@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Prism.Mvvm;
 
 namespace TheDeptBook.Model;
@@ -6,6 +9,14 @@ public class Debitor : BindableBase
 {
     string name;
     double balance;
+    double balanceDiff;
+    
+    private ObservableCollection<double> transactions;
+    public ObservableCollection<double> Transactions
+    {
+        get { return transactions; }
+        set { SetProperty(ref transactions, value); }
+    }
 
     public Debitor()
     {
@@ -15,6 +26,7 @@ public class Debitor : BindableBase
     {
         name = dName;
         balance = dBalance;
+        balanceDiff = 0;
     }
     
     public Debitor Clone()
@@ -43,6 +55,18 @@ public class Debitor : BindableBase
         set
         {
             SetProperty(ref balance, value);
+        }
+    }
+    
+    public double BalanceDiff
+    {
+        get
+        {
+            return balanceDiff;
+        }
+        set
+        {
+            SetProperty(ref balanceDiff, value);
         }
     }
 }

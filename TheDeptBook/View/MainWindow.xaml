@@ -76,7 +76,7 @@
                       Height="250">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <prism:InvokeCommandAction Command="{Binding EditCommand}"/>
+                        <prism:InvokeCommandAction Command="{Binding AddTransactionCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </DataGrid>

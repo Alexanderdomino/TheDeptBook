@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -5,15 +6,24 @@ using TheDeptBook.Model;
 
 namespace TheDeptBook.ViewModel;
 
-public class DebitorViewModel : BindableBase
+public class TransactionHistoryViewModel : BindableBase
 {
-    public DebitorViewModel(string title, Debitor debitor)
+    public TransactionHistoryViewModel(string title, Debitor debitor)
     {
         Title = title;
         CurrentDebitor = debitor;
+        CurrentTransactions = debitor.Transactions;
     }
 
     #region Properties
+    
+    private ObservableCollection<double> currentTransactions;
+    public ObservableCollection<double> CurrentTransactions
+    {
+        get { return currentTransactions; }
+        set { SetProperty(ref currentTransactions, value); }
+    }
+    
     string title;
 
     public string Title
@@ -50,26 +60,28 @@ public class DebitorViewModel : BindableBase
 
     #region Commands
 
-    ICommand _saveBtnCommand;
-    public ICommand SaveBtnCommand
+    ICommand _addBtnCommand;
+    public ICommand AddBtnCommand
     {
         get
         {
-            return _saveBtnCommand ??= new DelegateCommand(
-                    SaveBtnCommand_Execute, SaveBtnCommand_CanExecute)
+            return _addBtnCommand ??= new DelegateCommand(
+                    AddBtnCommand_Execute, AddBtnCommand_CanExecute)
                 .ObservesProperty(() => CurrentDebitor.Name);
         }
     }
 
-    private void SaveBtnCommand_Execute()
+    private void AddBtnCommand_Execute()
     {
-        // No action here - is handled i code behind
+        CurrentTransactions.Add(CurrentDebitor.BalanceDiff);
+        CurrentDebitor.Balance += CurrentDebitor.BalanceDiff;
     }
 
-    private bool SaveBtnCommand_CanExecute()
+    private bool AddBtnCommand_CanExecute()
     {
         return IsValid;
     }
 
     #endregion
 }
+

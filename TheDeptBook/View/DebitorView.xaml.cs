@@ -16,6 +16,6 @@ public partial class DebitorView : Window
         if (vm.IsValid)
             DialogResult = true;
         else
-            MessageBox.Show("Enter values for Id, codename and specialities", "Missing data");
+            MessageBox.Show("Enter values", "Missing data");
     }
 }

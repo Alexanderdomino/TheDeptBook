@@ -1,14 +1,15 @@
-<Window x:Class="TheDeptBook.View.DebitorView"
+<Window x:Class="TheDeptBook.View.TransactionHistoryView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TheDeptBook.View"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="200" Width="250">
+        Title="The Dept Book" Height="350" Width="250">
+    
     <Window.Resources>
-        <Thickness x:Key="TboxMargin">0,10,0,0</Thickness>
-        <Thickness x:Key="TblkMargin">0,10,0,-10</Thickness>
+        <Thickness x:Key="TboxMargin">0,0,0,10</Thickness>
+        <Thickness x:Key="TblkMargin">0,10,0,10</Thickness>
         <Thickness x:Key="ButtonMargin">10,0,10,0</Thickness>
     </Window.Resources>
 
@@ -28,35 +29,32 @@
             </Style>
 
         </StackPanel.Resources>
-        <TextBlock>
-            Enter Name of Contact:
+        <TextBlock HorizontalAlignment="Center">
+            Transaction history:
         </TextBlock>
-        <TextBox Name = "TboxName"
-                 Text="{Binding Path=CurrentDebitor.Name}">
-        </TextBox>
+        
+        <ListBox Height="200" ItemsSource="{Binding CurrentDebitor.Transactions}">
 
-        <TextBlock>
-            Enter initial value:
-        </TextBlock>
-        <TextBox Name = "TboxValue"
-                 Text="{Binding Path=CurrentDebitor.Balance}">
+        </ListBox>
+        
+        <Label>
+            Enter new transaction:
+        </Label>
+        <TextBox Text="{Binding CurrentDebitor.BalanceDiff}">
+            
         </TextBox>
         
-        <TextBlock>
-
-        </TextBlock>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Name="SaveButton" 
                     Width="60"
-                    Command="{Binding SaveBtnCommand}"
-                    Click="btnSave_Click">
-                Save
+                    Command="{Binding AddBtnCommand}">
+                Add
             </Button>
 
             <Button Name="CancelButton" 
                     Width="60"
-                    Command = "{Binding CloseAddContactCommand}"
+                    Command = "{Binding CloseCommand}"
                     IsCancel="True">
                 Cancel
             </Button>
